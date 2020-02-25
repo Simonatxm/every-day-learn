@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.1 this</title>
+</head>
+<body>
+    <h1>例题组合1 结论</h1>
+    <h2>
+        在执行函数时，如果函数中的this是被上一级调用，那么this指向的就是上一级对象；否则就是全局对象
+    </h2>
+</body>
+<script type="text/javascript">
+//例题组合1：全局环境下的 this 
+console.log('*****例题组合1******')
+function f1 () {  
+    console.log(this)  
+}  
+function f2 () {  
+ 'use strict'  
+    console.log(this)  
+}  
+f1() // window  
+f2() // undefined
+const foo = {
+ bar: 10,
+ fn: function() {
+    console.log(this)
+    console.log(this.bar)
+ }
+}
+var fn1 = foo.fn
+fn1()  //window underfined
+foo.fn()  //{bar: 10, fn: f} 10
+</script>
+</html>

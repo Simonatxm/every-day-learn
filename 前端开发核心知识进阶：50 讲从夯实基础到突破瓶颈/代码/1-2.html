@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1.2 上下文对象调用中的this</title>
+  </head>
+  <body>
+    <h1>例题组合2 上下文对象调用中的this</h1>
+    <h2>
+        this 指向最后调用它的对象
+    </h2>
+  </body>
+  <script>
+    //例题组合2：全局环境下的 this
+    console.log("*****例题组合1******");
+    const student = {
+      name: "Lucas",
+      fn: function() {
+        return this;
+      }
+    };
+    console.log(student.fn() === student); //true
+    const person = {
+      name: "Lucas",
+      brother: {
+        name: "Mike",
+        fn: function() {
+          return this.name;
+        }
+      }
+    };
+    console.log(person.brother.fn()); //Mike
+
+    const o1 = {
+      text: "o1",
+      fn: function() {
+        return this.text;
+      }
+    };
+
+    const o2 = {
+      text: "o2",
+      fn: function() {
+        return o1.fn();
+      },
+      fn2:o1.fn
+    };
+
+    const o3 = {
+      text: "o3",
+      fn: function() {
+        var fn = o1.fn;
+        return fn();
+      }
+    };
+
+    console.log(o1.fn()); //o1
+    console.log(o2.fn());//o1
+    console.log(o3.fn());//underfined
+
+    //输出 o2
+    console.log(o2.fn2()) 
+  </script>
+</html>
